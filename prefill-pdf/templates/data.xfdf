@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xfdf xmlns="http://ns.adobe.com/xfdf/" xml:space="preserve">
+<fields>
+<field name="topmostSubform[0]">
+	<field name="Page1[0]">
+		<field name="Case_à_cocher1[0]">
+			<value>{%if "Faire une déclaration d’intention d’aliéner un bien" in type_cerfa %}1{% endif %}</value>
+		</field>
+		<field name="Champ_de_texte1[1]">
+			<value>{{ proprietaire_physique_nom }}</value>
+		</field>
+		<field name="Champ_de_texte1[2]">
+			<value>{{ proprietaire_physique_profession }}</value>
+		</field>
+	</field>
+</field>
+</fields>
+</xfdf>
