@@ -35,7 +35,7 @@ class Prefill_PDF(BaseResource):
     @endpoint(
         name="prefill",
         methods=["post"],
-        description=ugettext_lazy("Prefill PDF"),
+        description=ugettext_lazy("Appel de remplissage de PDF"),
     )
     def prefill(self, request, *args, **kwargs):
         self.logger.info(f"DEBUG prefill")
