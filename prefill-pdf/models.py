@@ -20,7 +20,7 @@ class Prefill_PDF(BaseResource):
     category = 'Divers'
 
     class Meta:
-        verbose_name = 'Pré-remplissage de fichier PDF de façon automatique'
+        verbose_name = 'Pré-remplissage de fichier PDF'
 
     api_description = "API de remplissage de fichier PDF remplissable avec les données d'un formulaire"
 
