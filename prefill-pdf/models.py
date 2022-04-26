@@ -20,7 +20,7 @@ class Prefill_PDF(BaseResource):
     category = 'Divers'
 
     class Meta:
-        verbose_name = 'Pré-remplissage de fichier PDF'
+        verbose_name = 'Pré-remplissage de fichier PDF de façon automatique'
 
     api_description = "API de remplissage de fichier PDF remplissable avec les données d'un formulaire"
 
@@ -64,5 +64,3 @@ class Prefill_PDF(BaseResource):
         file_payload['file']['b64_content'] = force_text(base64_bytes, encoding='ascii')
 
         return file_payload
-
-# ligne de commande pour remplir le formulaire avec les données : pdftk cerfa_10072-02.pdf fill_form rendered_data.xfdf output doc_rempli.pdf flatten
