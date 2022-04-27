@@ -1,18 +1,604 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xfdf xmlns="http://ns.adobe.com/xfdf/" xml:space="preserve">
-<fields>
-<field name="topmostSubform[0]">
-	<field name="Page1[0]">
-		<field name="Case_à_cocher1[0]">
-			<value>{%if "Faire une déclaration d’intention d’aliéner un bien" in type_cerfa %}1{% endif %}</value>
-		</field>
-		<field name="Champ_de_texte1[1]">
-			<value>{{ proprietaire_physique_nom }}</value>
-		</field>
-		<field name="Champ_de_texte1[2]">
-			<value>{{ proprietaire_physique_profession }}</value>
-		</field>
-	</field>
-</field>
-</fields>
+    <f href="cerfa_10072-02.pdf"/>
+    <fields>
+        <field name="topmostSubform[0]">
+            <field name="Page1[0]">
+                <field name="Case_à_cocher1[0]">
+                    <value>{% if type_cerfa == "Faire une déclaration d’intention d’aliéner un bien" %}1{% endif %}</value>
+                </field>
+                <field name="Case_à_cocher1[1]">
+                    <value>{% if type_cerfa == "Faire une demande d’acquisition d’un bien" %}1{% endif %}</value>
+                </field>
+                <field name="Case_à_cocher1[2]">
+                    <value>{% if type_DIA == "Soumis au droit de préemption urbain (D.P.U) (articles L. 211-1 et suivants du Code de l’urbanisme (2))" %}1{% endif %}</value>
+                </field>
+                <field name="Case_à_cocher1[3]">
+                    <value>{% if type_DIA == "Compris dans une zone d’aménagement différé (Z.A.D.) (articles L.212-1- et suivants du Code de l’urbanisme (3))" %}1{% endif %}</value>
+                </field>
+                <field name="Case_à_cocher1[4]">
+                    <value>{% if type_DIA == "Compris dans une zone de préemption délimitée au titre des espaces naturels sensibles de départements (articles L. 142-1- et suivants du Code de l’urbanisme(4))" %}1{% endif %}</value>
+                </field>
+                <field name="Case_à_cocher1[5]">
+                    <value>{% if type_DIA == "Soumis au droit de préemption urbain (D.P.U.) (2)" %}1{% endif %}</value>
+                </field>
+                <field name="Case_à_cocher1[6]">
+                    <value>{% if type_DIA == "Compris dans une zone d’aménagement différé (Z.A.D.) (3)" %}1{% endif %}</value>
+                </field>
+                <field name="Champ_de_texte1[0]">
+                    <value></value>
+                </field>
+                {% if "Personne(s) physique(s)" in type_proprietaire %}
+                    {% with premier_proprio=proprietaire_physique_raw|first %}
+                    <field name="Champ_de_texte1[1]">
+                        <value>{{premier_proprio.nom}}</value>
+                    </field>
+                    <field name="Champ_de_texte1[2]">
+                        <value>{{premier_proprio.profession}}</value>
+                    </field>
+                    <field name="Champ_de_texte1[6]">
+                        <value>{{premier_proprio.num_voie|default_if_none:""}}</value>
+                    </field>
+                    <field name="Champ_de_texte1[7]">
+                        <value>{{premier_proprio.extension|default_if_none:""}}</value>
+                    </field>
+                    <field name="Champ_de_texte1[8]">
+                        <value>{{premier_proprio.type_voie|default_if_none:""}}</value>
+                    </field>
+                    <field name="Champ_de_texte1[9]">
+                        <value>{{premier_proprio.nom_voie|default_if_none:""}}</value>
+                    </field>
+                    <field name="Champ_de_texte1[10]">
+                        <value>{{premier_proprio.lieu_dit|default_if_none:""}}</value>
+                    </field>
+                    <field name="Champ_de_texte1[11]">
+                        <value>{{premier_proprio.code_postal|default_if_none:""}}</value>
+                    </field>
+                    <field name="Champ_de_texte1[12]">
+                        <value>{{premier_proprio.localite|upper|default_if_none:""}}</value>
+                    </field>
+                    {% endwith %}
+                {% elif "Personne(s) morale(s)" in type_proprietaire %}
+                    {% with premier_proprio=proprietaire_morale_raw|first %}
+                    <field name="Champ_de_texte1[3]">
+                        <value>{{premier_proprio.denomination}}</value>
+                    </field>
+                    <field name="Champ_de_texte1[4]">
+                        <value>{{premier_proprio.forme_juridique}}</value>
+                    </field>
+                    <field name="Champ_de_texte1[5]">
+                        <value>{{premier_proprio.representant}}</value>
+                    </field>
+                    <field name="Champ_de_texte1[6]">
+                        <value>{{premier_proprio.num_voie|default_if_none:""}}</value>
+                    </field>
+                    <field name="Champ_de_texte1[7]">
+                        <value>{{premier_proprio.extension|default_if_none:""}}</value>
+                    </field>
+                    <field name="Champ_de_texte1[8]">
+                        <value>{{premier_proprio.type_voie|default_if_none:""}}</value>
+                    </field>
+                    <field name="Champ_de_texte1[9]">
+                        <value>{{premier_proprio.nom_voie|default_if_none:""}}</value>
+                    </field>
+                    <field name="Champ_de_texte1[10]">
+                        <value>{{premier_proprio.lieu_dit|default_if_none:""}}</value>
+                    </field>
+                    <field name="Champ_de_texte1[11]">
+                        <value>{{premier_proprio.code_postal|default_if_none:""}}</value>
+                    </field>
+                    <field name="Champ_de_texte1[12]">
+                        <value>{{premier_proprio.localite|upper|default_if_none:""}}</value>
+                    </field>
+                    {% endwith %}
+                {% endif %}
+                <field name="Champ_de_texte1[13]">
+                    <value>{{adresse_ban_var_numero|default_if_none:""}}</value>
+                </field>
+                <field name="Champ_de_texte1[14]">
+                    <value>{# extension #}</value>
+                </field>
+                <field name="Champ_de_texte1[15]">
+                    <value>{# bien type voie #}</value>
+                </field>
+                <field name="Champ_de_texte1[16]">
+                    <value>{{adresse_ban_var_rue|default_if_none:""}}</value>
+                </field>
+                <field name="Champ_de_texte1[17]">
+                    <value>{# bien BP #}</value>
+                </field>
+                <field name="Champ_de_texte1[18]">
+                    <value>{{ adresse_ban_var_code_postal|default_if_none:"" }}</value>
+                </field>
+                <field name="Champ_de_texte1[19]">
+                    <value>{{ adresse_bien_var_ville|default_if_none:"" }}</value>
+                </field>
+                <field name="Champ_de_texte1[20]">
+                    <value>{{ superficie_bien }}</value>
+                </field>
+                {% with premiere_parcelle=parcelles_raw.0 %}
+                    <field name="Champ_de_texte1[21]" >
+                        <value>{{premiere_parcelle.section}}</value>
+                    </field>
+                    <field name="Champ_de_texte1[22]">
+                        <value>{{premiere_parcelle.numero}}</value>
+                    </field>
+                    <field name="Champ_de_texte1[23]">
+                        <value>{{premiere_parcelle.lieu_dit}}</value>
+                    </field>
+                    <field name="Champ_de_texte1[24]">
+                        <value>{{premiere_parcelle.superficie}}</value>
+                    </field>
+                {% endwith %}
+                {% with premiere_parcelle=parcelles_raw.1 %}
+                    <field name="Champ_de_texte1[25]">
+                        <value>{{premiere_parcelle.section}}</value>
+                    </field>
+                    <field name="Champ_de_texte1[26]">
+                        <value>{{premiere_parcelle.numero}}</value>
+                    </field>
+                    <field name="Champ_de_texte1[27]">
+                        <value>{{premiere_parcelle.lieu_dit}}</value>
+                    </field>
+                    <field name="Champ_de_texte1[28]">
+                        <value>{{premiere_parcelle.superficie}}</value>
+                    </field>
+                {% endwith %}
+                <field name="Case_à_cocher1[7]">
+                    <value>{% if fichier_plan_cadastral %}1{% endif %}</value>
+                </field>
+                <field name="Case_à_cocher1[8]">
+                    <value>{% if not fichier_plan_cadastral %}1{% endif %}</value>
+                </field>
+                <field name="Case_à_cocher1[9]">
+                    <value>{% if immeuble == "Non bâti" %}1{% endif %}</value>
+                </field>
+                <field name="Case_à_cocher1[10]">
+                    <value>{% if immeuble == "Bâti sur terrain propre" %}1{% endif %}</value>
+                </field>
+                <field name="Case_à_cocher1[11]">
+                    <value>{% if immeuble == "Bâti sur terrain d'autrui" %}1{% endif %}</value>
+                </field>
+                <field name="Champ_de_texte1[29]">
+                    <value>{{ occupation_sol_terres|default_if_none:"" }}</value>
+                </field>
+                <field name="Champ_de_texte1[30]">
+                    <value>{{ occupation_sol_pres|default_if_none:"" }}</value>
+                </field>
+                <field name="Champ_de_texte1[31]">
+                    <value>{{ occupation_sol_vergers|default_if_none:"" }}</value>
+                </field>
+                <field name="Champ_de_texte1[32]">
+                    <value>{{ occupation_sol_vignes|default_if_none:"" }}</value>
+                </field>
+                <field name="Champ_de_texte1[33]">
+                    <value>{{ occupation_sol_bois|default_if_none:"" }}</value>
+                </field>
+                <field name="Champ_de_texte1[34]">
+                    <value>{{ occupation_sol_landes|default_if_none:"" }}</value>
+                </field>
+                <field name="Champ_de_texte1[35]">
+                    <value>{{ occupation_sol_carrieres|default_if_none:"" }}</value>
+                </field>
+                <field name="Champ_de_texte1[36]">
+                    <value>{{ occupation_sol_eaux|default_if_none:"" }}</value>
+                </field>
+                <field name="Champ_de_texte1[37]">
+                    <value>{{ occupation_sol_jardins|default_if_none:"" }}</value>
+                </field>
+                <field name="Champ_de_texte1[38]">
+                    <value>{{ occupation_sol_terrains_batir|default_if_none:"" }}</value>
+                </field>
+                <field name="Champ_de_texte1[39]">
+                    <value>{{ occupation_sol_terrain_agrement|default_if_none:"" }}</value>
+                </field>
+                <field name="Champ_de_texte1[40]">
+                    <value>{{ occupation_sol_sol|default_if_none:"" }}</value>
+                </field>
+            </field>
+            <field name="Page2[0]">
+                <field name="Case_à_cocher1[0]">
+                    <value>{{ batiment_vendu }}</value>
+                </field>
+                <field name="Champ_de_texte1[0]">
+                    <value>{{batiment_vendu_precision|default_if_none:""}}</value>
+                </field>
+                <field name="Champ_de_texte1[1]">
+                    <value>surface construite</value>
+                </field>
+                <field name="Champ_de_texte1[2]">
+                    <value>surface utile</value>
+                </field>
+                <field name="Champ_de_texte1[3]">
+                    <value>niveaux</value>
+                </field>
+                <field name="Case_à_cocher1[1]">
+                    <value>nbre niveaux</value>
+                </field>
+                <field name="Champ_de_texte1[4]">
+                    <value>appart</value>
+                </field>
+                <field name="Case_à_cocher1[2]">
+                    <value>nbre appart</value>
+                </field>
+                <field name="Champ_de_texte1[5]">
+                    <value>autre</value>
+                </field>
+                <field name="Case_à_cocher1[3]">
+                    <value>nbre autres locaux</value>
+                </field>
+                <field name="Case_à_cocher1[4]">
+                    <value>vente lot volume</value>
+                </field>
+                <field name="Champ_de_texte1[6]">
+                    <value>vente lot volume</value>
+                </field>
+                <field name="Case_à_cocher1[5]">
+                    <value>locaux batiment copropriété</value>
+                </field>
+                <field name="Champ_de_texte1[7]">
+                    <value>locaux batiment copropriété</value>
+                </field>
+                <field name="Champ_de_texte1[8]">
+                    <value>N°1 lot</value>
+                </field>
+                <field name="Champ_de_texte1[9]">
+                    <value>bat 1</value>
+                </field>
+                <field name="Champ_de_texte1[11]">
+                    <value>etage 1</value>
+                </field>
+                <field name="Champ_de_texte1[46]">
+                    <value>QP 1</value>
+                </field>
+                <field name="Champ_de_texte1[48]">
+                    <value>nature 1</value>
+                </field>
+                <field name="Champ_de_texte1[10]">
+                    <value>N°2</value>
+                </field>
+                <field name="Champ_de_texte1[12]">
+                    <value>bat 2</value>
+                </field>
+                <field name="Champ_de_texte1[13]">
+                    <value>etage 2</value>
+                </field>
+                <field name="Champ_de_texte1[47]">
+                    <value>QP 2</value>
+                </field>
+                <field name="Champ_de_texte1[49]">
+                    <value>nature 2</value>
+                </field>
+                <field name="Case_à_cocher1[6]">
+                    <value>batiment achevé plus 10</value>
+                </field>
+                <field name="Case_à_cocher1[7]">
+                    <value>batiment acheve moins 10</value>
+                </field>
+                <field name="Case_à_cocher1[8]">
+                    <value>copro publie plus 10</value>
+                </field>
+                <field name="Case_à_cocher1[9]">
+                    <value>copro publie moins 10</value>
+                </field>
+                <field name="Champ_de_texte1[50]">
+                    <value>indivision quote-part bien vendu</value>
+                </field>
+                <field name="Champ_de_texte1[14]">
+                    <value>designation société</value>
+                </field>
+                <field name="Champ_de_texte1[15]">
+                    <value>désignation droits</value>
+                </field>
+                <field name="Champ_de_texte1[16]">
+                    <value>nature</value>
+                </field>
+                <field name="Champ_de_texte1[17]">
+                    <value>nombre</value>
+                </field>
+                <field name="Champ_de_texte1[18]">
+                    <value>num parts</value>
+                </field>
+                <field name="Case_à_cocher1[10]">
+                    <value>usage habitation</value>
+                </field>
+                <field name="Case_à_cocher1[11]">
+                    <value>usage pro</value>
+                </field>
+                <field name="Case_à_cocher1[12]">
+                    <value>usage mixte</value>
+                </field>
+                <field name="Case_à_cocher1[13]">
+                    <value>usage commercial</value>
+                </field>
+                <field name="Case_à_cocher1[14]">
+                    <value>usage agricole</value>
+                </field>
+                <field name="Case_à_cocher1[15]">
+                    <value>usage autre</value>
+                </field>
+                <field name="Champ_de_texte1[19]">
+                    <value>usage autre</value>
+                </field>
+                <field name="Case_à_cocher1[16]">
+                    <value>occupation proprio</value>
+                </field>
+                <field name="Case_à_cocher1[17]">
+                    <value>occupation locataire</value>
+                </field>
+                <field name="Case_à_cocher1[18]">
+                    <value>occupation sans occupant</value>
+                </field>
+                <field name="Case_à_cocher1[19]">
+                    <value>occupation autre</value>
+                </field>
+                <field name="Champ_de_texte1[20]">
+                    <value>occupation autre</value>
+                </field>
+                <field name="Case_à_cocher1[20]">
+                    <value>grevant bien OUI</value>
+                </field>
+                <field name="Case_à_cocher1[21]">
+                    <value>grevant bien NON</value>
+                </field>
+                <field name="Champ_de_texte1[21]">
+                    <value>grevant biens</value>
+                </field>
+                <field name="Champ_de_texte1[22]">
+                    <value>grevant bien nature</value>
+                </field>
+                <field name="Champ_de_texte1[23]">
+                    <value>rente viagère antérieure</value>
+                </field>
+                <field name="Champ_de_texte1[24]">
+                    <value>prix vente</value>
+                </field>
+                <field name="Champ_de_texte1[25]">
+                    <value>mobilier</value>
+                </field>
+                <field name="Champ_de_texte1[26]">
+                    <value>cheptel</value>
+                </field>
+                <field name="Champ_de_texte1[27]">
+                    <value>récoltes</value>
+                </field>
+                <field name="Champ_de_texte1[28]">
+                    <value>autres</value>
+                </field>
+                <field name="Champ_de_texte1[29]">
+                    <value>adresse précise bien</value>
+                </field>
+                <field name="Case_à_cocher1[22]">
+                    <value>modalité paiement signature</value>
+                </field>
+                <field name="Case_à_cocher1[23]">
+                    <value>modalité paiement à terme</value>
+                </field>
+                <field name="Champ_de_texte1[30]">
+                    <value>paiement modalité</value>
+                </field>
+                <field name="Case_à_cocher1[24]">
+                    <value>commission montant</value>
+                </field>
+                <field name="Champ_de_texte1[31]">
+                    <value>commission montant</value>
+                </field>
+                <field name="Case_à_cocher1[25]">
+                    <value>commission TTC</value>
+                </field>
+                <field name="Case_à_cocher1[26]">
+                    <value>comission HT</value>
+                </field>
+                <field name="Case_à_cocher1[27]">
+                    <value>bénéficiaire acquéreur</value>
+                </field>
+                <field name="Case_à_cocher1[28]">
+                    <value>bénéficiaire vendeur</value>
+                </field>
+                <field name="Champ_de_texte1[32]">
+                    <value>paiement nature</value>
+                </field>
+                <field name="Case_à_cocher1[29]">
+                    <value>paiement nature</value>
+                </field>
+                <field name="Champ_de_texte1[33]">
+                    <value>contrepartie aliénation</value>
+                </field>
+                <field name="Champ_de_texte1[34]">
+                    <value>évaluation contrepartie</value>
+                </field>
+                <field name="Case_à_cocher1[30]">
+                    <value>rente viagère</value>
+                </field>
+                <field name="Champ_de_texte1[35]">
+                    <value>rente viagère</value>
+                </field>
+                <field name="Champ_de_texte1[36]">
+                    <value>montant annuel</value>
+                </field>
+                <field name="Champ_de_texte1[37]">
+                    <value>montant comptant</value>
+                </field>
+                <field name="Champ_de_texte1[38]">
+                    <value>bénéficiaire rente</value>
+                </field>
+                <field name="Case_à_cocher1[31]">
+                    <value>droit usage</value>
+                </field>
+                <field name="Champ_de_texte1[39]">
+                    <value>droit usage</value>
+                </field>
+                <field name="Champ_de_texte1[40]">
+                    <value>évaluation usage</value>
+                </field>
+                <field name="Case_à_cocher1[32]">
+                    <value>vente nue</value>
+                </field>
+                <field name="Champ_de_texte1[41]">
+                    <value>vente nue-propriété</value>
+                </field>
+                <field name="Case_à_cocher1[33]">
+                    <value>echange</value>
+                </field>
+                <field name="Champ_de_texte1[42]">
+                    <value>échange</value>
+                </field>
+                <field name="Champ_de_texte1[43]">
+                    <value>désignation biens</value>
+                </field>
+                <field name="Champ_de_texte1[44]">
+                    <value>montant soulte</value>
+                </field>
+                <field name="Champ_de_texte1[45]">
+                    <value>proprio contre-échange</value>
+                </field>
+            </field>
+            <field name="Page3[0]">
+                <field name="Case_à_cocher1[0]">
+                    <value>apport en société</value>
+                </field>
+                <field name="Champ_de_texte1[0]">
+                    <value>apport société</value>
+                </field>
+                <field name="Champ_de_texte1[1]">
+                    <value>bénéficiaire</value>
+                </field>
+                <field name="Champ_de_texte1[2]">
+                    <value>estimation bien</value>
+                </field>
+                <field name="Champ_de_texte1[3]">
+                    <value>estimation terrain</value>
+                </field>
+                <field name="Case_à_cocher1[1]">
+                    <value>cession tantième</value>
+                </field>
+                <field name="Champ_de_texte1[4]">
+                    <value>cession tantième</value>
+                </field>
+                <field name="Champ_de_texte1[5]">
+                    <value>estimation locaux</value>
+                </field>
+                <field name="Case_à_cocher1[2]">
+                    <value>location-accession</value>
+                </field>
+                <field name="Champ_de_texte1[6]">
+                    <value>location-accession</value>
+                </field>
+                <field name="Case_à_cocher1[3]">
+                    <value>volontaire</value>
+                </field>
+                <field name="Case_à_cocher1[4]">
+                    <value>adjudication obligatoire</value>
+                </field>
+                <field name="Champ_de_texte1[7]">
+                    <value>adjudication obligatoire</value>
+                </field>
+                <field name="Case_à_cocher1[5]">
+                    <value>fin indivision</value>
+                </field>
+                <field name="Champ_de_texte1[8]">
+                    <value>fin indivision</value>
+                </field>
+                <field name="Champ_de_texte1[9]">
+                    <value>adjud. date</value>
+                </field>
+                <field name="Champ_de_texte1[10]">
+                    <value>adjud. mise prix</value>
+                </field>
+                <field name="Case_à_cocher1[6]">
+                    <value>soussignés déclarent 1</value>
+                </field>
+                <field name="Case_à_cocher1[7]">
+                    <value>soussigné décalrent 2</value>
+                </field>
+                <field name="Champ_de_texte1[11]">
+                    <value>acquereur nom prénom</value>
+                </field>
+                <field name="Champ_de_texte1[12]">
+                    <value>acquéreur profession</value>
+                </field>
+                <field name="Champ_de_texte1[13]">
+                    <value>adresse num</value>
+                </field>
+                <field name="Champ_de_texte1[14]">
+                    <value>adresse extension</value>
+                </field>
+                <field name="Champ_de_texte1[15]">
+                    <value>adresse type</value>
+                </field>
+                <field name="Champ_de_texte1[16]">
+                    <value>adresse nom</value>
+                </field>
+                <field name="Champ_de_texte1[17]">
+                    <value>adresse BP</value>
+                </field>
+                <field name="Champ_de_texte1[18]">
+                    <value>adresse CP</value>
+                </field>
+                <field name="Champ_de_texte1[19]">
+                    <value>Adresse localité</value>
+                </field>
+                <field name="Champ_de_texte1[20]">
+                    <value>adresse indications complémentaires</value>
+                </field>
+                <field name="Case_à_cocher1[8]">
+                    <value>sousignés déclarent vente adjudication</value>
+                </field>
+                <field name="Champ_de_texte1[21]">
+                    <value>signature lieu</value>
+                </field>
+                <field name="Champ_de_texte1[22]">
+                    <value>signature date</value>
+                </field>
+                <field name="Champ_de_texte1[23]">
+                    <value>cachet</value>
+                </field>
+                <field name="Champ_de_texte1[24]">
+                    <value>signataire nom prénom</value>
+                </field>
+                <field name="Champ_de_texte1[25]">
+                    <value>signataire qualité</value>
+                </field>
+                <field name="Champ_de_texte1[26]">
+                    <value>signat. num</value>
+                </field>
+                <field name="Champ_de_texte1[27]">
+                    <value>signat. extension</value>
+                </field>
+                <field name="Champ_de_texte1[28]">
+                    <value>signat. type</value>
+                </field>
+                <field name="Champ_de_texte1[29]">
+                    <value>signat. nom</value>
+                </field>
+                <field name="Champ_de_texte1[30]">
+                    <value>signat. BP</value>
+                </field>
+                <field name="Champ_de_texte1[31]">
+                    <value>signat. CP</value>
+                </field>
+                <field name="Champ_de_texte1[32]">
+                    <value>signat. localité</value>
+                </field>
+                <field name="Case_à_cocher1[9]">
+                    <value>notif A</value>
+                </field>
+                <field name="Champ_de_texte1[33]">
+                    <value>notif A</value>
+                </field>
+                <field name="Case_à_cocher1[10]">
+                    <value>notif H</value>
+                </field>
+                <field name="Champ_de_texte1[34]">
+                    <value>notif H</value>
+                </field>
+                <field name="Champ_de_texte1[35]">
+                    <value>observations</value>
+                </field>
+                <field name="Champ_de_texte1[36]">
+                    <value>titulaire droit préemption</value>
+                </field>
+            </field>
+        </field>
+    </fields>
 </xfdf>
