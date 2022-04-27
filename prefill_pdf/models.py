@@ -63,4 +63,6 @@ class Prefill_PDF(BaseResource):
         # file_payload['file']['b64_content'] = base64_string
         file_payload['file']['b64_content'] = force_text(base64_bytes, encoding='ascii')
 
+        os.remove(filled_pdf)
+
         return file_payload
