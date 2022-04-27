@@ -1,0 +1,7 @@
+# Ignore les fichiers et sous-dossier du dossier tmp
+# Tout en préservant lui-même ce dossier
+# https://stackoverflow.com/a/5581995
+
+*
+*/
+!.gitignore
