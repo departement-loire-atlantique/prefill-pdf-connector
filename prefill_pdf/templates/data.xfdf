@@ -198,185 +198,185 @@
             </field>
             <field name="Page2[0]">
                 <field name="Case_à_cocher1[0]">
-                    <value>{{ batiment_vendu }}</value>
+                    <value>{% if batiment_vendu %}1{% endif %}</value>
                 </field>
                 <field name="Champ_de_texte1[0]">
                     <value>{{batiment_vendu_precision|default_if_none:""}}</value>
                 </field>
                 <field name="Champ_de_texte1[1]">
-                    <value>surface construite</value>
+                    <value>{{ surface_construite }}</value>
                 </field>
                 <field name="Champ_de_texte1[2]">
-                    <value>surface utile</value>
-                </field>
-                <field name="Champ_de_texte1[3]">
-                    <value>niveaux</value>
+                    <value>{{ surface_utile }}</value>
                 </field>
                 <field name="Case_à_cocher1[1]">
-                    <value>nbre niveaux</value>
+                    <value>{% if niveau == "Oui" %}1{% endif %}</value>
                 </field>
-                <field name="Champ_de_texte1[4]">
-                    <value>appart</value>
+                <field name="Champ_de_texte1[3]">
+                    <value>{{ nombre_niveau|default_if_none:""}}</value>
                 </field>
                 <field name="Case_à_cocher1[2]">
-                    <value>nbre appart</value>
+                    <value>{% if appartements == "Oui" %}1{% endif %}</value>
                 </field>
-                <field name="Champ_de_texte1[5]">
-                    <value>autre</value>
+                <field name="Champ_de_texte1[4]">
+                    <value>{{nombre_appartements}}</value>
                 </field>
                 <field name="Case_à_cocher1[3]">
-                    <value>nbre autres locaux</value>
+                    <value>{% if autres_locaux == "Oui" %}1{% endif %}</value>
+                </field>
+                <field name="Champ_de_texte1[5]">
+                    <value>{{nombre_autres_locaux}}</value>
                 </field>
                 <field name="Case_à_cocher1[4]">
-                    <value>vente lot volume</value>
+                    <value>{% if vente_lot_volumes == "Oui" %}1{% endif %}</value>
                 </field>
                 <field name="Champ_de_texte1[6]">
-                    <value>vente lot volume</value>
+                    <value>{{ vente_lot_volumes_details|default_if_none:"" }}</value>
                 </field>
                 <field name="Case_à_cocher1[5]">
-                    <value>locaux batiment copropriété</value>
+                    <value>{% if locaux_copropriete == "Oui" %}1{% endif %}</value>
                 </field>
                 <field name="Champ_de_texte1[7]">
-                    <value>locaux batiment copropriété</value>
+                    <value>{{ locaux_copropriete_details }}</value>
                 </field>
                 <field name="Champ_de_texte1[8]">
-                    <value>N°1 lot</value>
+                    <value>{{locaux_copropriete_tableau_num_lot|default_if_none:""|truncatechars:5 }}</value>
                 </field>
                 <field name="Champ_de_texte1[9]">
-                    <value>bat 1</value>
+                    <value>{{locaux_copropriete_tableau_batiment|default_if_none:""|truncatechars:8 }}</value>
                 </field>
                 <field name="Champ_de_texte1[11]">
-                    <value>etage 1</value>
+                    <value>{{locaux_copropriete_tableau_etage|default_if_none:""|truncatechars:6 }}</value>
                 </field>
                 <field name="Champ_de_texte1[46]">
-                    <value>QP 1</value>
+                    <value>{{locaux_copropriete_tableau_quote_part|default_if_none:""|truncatechars:8 }}</value>
                 </field>
                 <field name="Champ_de_texte1[48]">
-                    <value>nature 1</value>
-                </field>
-                <field name="Champ_de_texte1[10]">
-                    <value>N°2</value>
-                </field>
-                <field name="Champ_de_texte1[12]">
-                    <value>bat 2</value>
-                </field>
-                <field name="Champ_de_texte1[13]">
-                    <value>etage 2</value>
-                </field>
-                <field name="Champ_de_texte1[47]">
-                    <value>QP 2</value>
-                </field>
-                <field name="Champ_de_texte1[49]">
-                    <value>nature 2</value>
+                    <value>{{locaux_copropriete_tableau_nature|default_if_none:""|truncatechars:9}}</value>
                 </field>
                 <field name="Case_à_cocher1[6]">
-                    <value>batiment achevé plus 10</value>
+                    <value>{% if locaux_copropriete_tableau_achevement == "Plus de 10 ans" %}1{% endif %}</value>
                 </field>
                 <field name="Case_à_cocher1[7]">
-                    <value>batiment acheve moins 10</value>
+                    <value>{% if locaux_copropriete_tableau_achevement == "Moins de 10 ans" %}1{% endif %}</value>
                 </field>
                 <field name="Case_à_cocher1[8]">
-                    <value>copro publie plus 10</value>
+                    <value>{% if locaux_copropriete_tableau_hypotheques == "Plus de 10 ans" %}1{% endif %}</value>
                 </field>
                 <field name="Case_à_cocher1[9]">
-                    <value>copro publie moins 10</value>
+                    <value>{% if locaux_copropriete_tableau_hypotheques == "Moins de 10 ans" %}1{% endif %}</value>
                 </field>
                 <field name="Champ_de_texte1[50]">
-                    <value>indivision quote-part bien vendu</value>
+                    <value>{{indivision_quote_part|default_if_none:""}}</value>
                 </field>
                 <field name="Champ_de_texte1[14]">
-                    <value>designation société</value>
+                    <value>{{designation_societe|default_if_none:""}}</value>
                 </field>
                 <field name="Champ_de_texte1[15]">
-                    <value>désignation droits</value>
+                    <value>{{designation_droits|default_if_none:""}}</value>
                 </field>
                 <field name="Champ_de_texte1[16]">
-                    <value>nature</value>
+                    <value>{{nature_droits_sociaux|default_if_none:""}}</value>
                 </field>
                 <field name="Champ_de_texte1[17]">
-                    <value>nombre</value>
+                    <value>{{nombre_droits_sociaux|default_if_none:""}}</value>
                 </field>
                 <field name="Champ_de_texte1[18]">
-                    <value>num parts</value>
+                    <value>{{numero_droits_sociaux|default_if_none:""}}</value>
                 </field>
                 <field name="Case_à_cocher1[10]">
-                    <value>usage habitation</value>
+                    <value>{% if "Habitation" in usage_raw %}1{% endif %}</value>
                 </field>
                 <field name="Case_à_cocher1[11]">
-                    <value>usage pro</value>
+                    <value>{% if "Professionnel" in usage_raw %}1{% endif %}</value>
                 </field>
                 <field name="Case_à_cocher1[12]">
-                    <value>usage mixte</value>
+                    <value>{% if "Mixte" in usage_raw %}1{% endif %}</value>
                 </field>
                 <field name="Case_à_cocher1[13]">
-                    <value>usage commercial</value>
+                    <value>{% if "Commercial" in usage_raw %}1{% endif %}</value>
                 </field>
                 <field name="Case_à_cocher1[14]">
-                    <value>usage agricole</value>
+                    <value>{% if "Agricole" in usage_raw %}1{% endif %}</value>
                 </field>
                 <field name="Case_à_cocher1[15]">
-                    <value>usage autre</value>
+                    <value>{% if "Autre" in usage_raw %}1{% endif %}</value>
                 </field>
                 <field name="Champ_de_texte1[19]">
-                    <value>usage autre</value>
+                    <value>{{autre_precision_usage|default_if_none:""}}</value>
                 </field>
                 <field name="Case_à_cocher1[16]">
-                    <value>occupation proprio</value>
+                    <value>{% if "Par le(s) propriétaire(s)" in occupation_raw %}1{% endif %}</value>
                 </field>
                 <field name="Case_à_cocher1[17]">
-                    <value>occupation locataire</value>
+                    <value>{% if "Par un (des) locataire(s)" in occupation_raw %}1{% endif %}</value>
                 </field>
                 <field name="Case_à_cocher1[18]">
-                    <value>occupation sans occupant</value>
+                    <value>{% if "Sans occupant" in occupation_raw %}1{% endif %}</value>
                 </field>
                 <field name="Case_à_cocher1[19]">
-                    <value>occupation autre</value>
+                    <value>{% if "Autre" in occupation_raw %}1{% endif %}</value>
                 </field>
                 <field name="Champ_de_texte1[20]">
-                    <value>occupation autre</value>
+                    <value>{{autre_precision_occupation|default_if_none:""}}</value>
                 </field>
+                {% if grevant_biens == "Oui" %}
                 <field name="Case_à_cocher1[20]">
-                    <value>grevant bien OUI</value>
-                </field>
-                <field name="Case_à_cocher1[21]">
-                    <value>grevant bien NON</value>
+                    <value>1</value>
                 </field>
                 <field name="Champ_de_texte1[21]">
-                    <value>grevant biens</value>
+                    <value>{{grevant_biens_description|default_if_none:""}}</value>
                 </field>
+                {% elif grevant_biens == "Non sous réserve de la réception de l'état hypothécaire" %}
+                <field name="Case_à_cocher1[21]">
+                    <value>1</value>
+                </field>
+                <field name="Champ_de_texte1[21]">
+                    <value>sous réserve de la réception de l'état hypothécaire</value>
+                </field>
+                {% elif grevant_biens == "Non" %}
+                <field name="Case_à_cocher1[21]">
+                    <value>1</value>
+                </field>
+                {% endif %}
                 <field name="Champ_de_texte1[22]">
-                    <value>grevant bien nature</value>
+                    <value>{{grevant_biens_nature|default_if_none:""}}</value>
                 </field>
                 <field name="Champ_de_texte1[23]">
-                    <value>rente viagère antérieure</value>
+                    <value>{{grevant_biens_rente_viagere|default_if_none:""}}</value>
                 </field>
                 <field name="Champ_de_texte1[24]">
-                    <value>prix vente</value>
+                    <value>{{prix_vente_chiffre|default_if_none:""}} {{prix_vente_lettre|default_if_none:""}}</value>
                 </field>
                 <field name="Champ_de_texte1[25]">
-                    <value>mobilier</value>
+                    <value>{{inclus_prix_mobilier|default_if_none:""}}</value>
                 </field>
                 <field name="Champ_de_texte1[26]">
-                    <value>cheptel</value>
+                    <value>{{inclus_prix_cheptel|default_if_none:""}}</value>
                 </field>
                 <field name="Champ_de_texte1[27]">
-                    <value>récoltes</value>
+                    <value>{{inclus_prix_recoltes|default_if_none:""}}</value>
                 </field>
                 <field name="Champ_de_texte1[28]">
-                    <value>autres</value>
+                    <value>{{inclus_prix_autres|default_if_none:""}}</value>
                 </field>
-                <field name="Champ_de_texte1[29]">
-                    <value>adresse précise bien</value>
+                {% if adresse_bien_indissociable %}
+                <field name="Champ_de_texte1[29]"> 
+                    <value>{{adresse_bien_indissociable_var_numero|default_if_none:""}} {{adresse_bien_indissociable_var_rue|default_if_none:""}},{{ adresse_bien_indissociable_var_ville|default_if_none:"" }} ({{ adresse_bien_indissociable_var_code_postal|default_if_none:"" }})</value>
                 </field>
+                {% endif %}
+                {% if "Comptant à la signature de l'acte authentique" in modalite_paiement_raw %}
                 <field name="Case_à_cocher1[22]">
-                    <value>modalité paiement signature</value>
+                    <value>1</value>
                 </field>
+                {% elif "A terme" in modalite_paiement_raw %}
                 <field name="Case_à_cocher1[23]">
-                    <value>modalité paiement à terme</value>
+                    <value>1</value>
                 </field>
                 <field name="Champ_de_texte1[30]">
-                    <value>paiement modalité</value>
+                    <value>{{ paiement_a_terme|default_if_none:"" }}</value>
                 </field>
+                {% endif %}
                 <field name="Case_à_cocher1[24]">
                     <value>commission montant</value>
                 </field>
