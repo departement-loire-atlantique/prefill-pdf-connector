@@ -30,66 +30,66 @@
                 </field>
                 {% if "Personne(s) physique(s)" in type_proprietaire %}
                     {% with premier_proprio=proprietaire_physique_raw|first %}
-                    <field name="Champ_de_texte1[1]">
-                        <value>{{premier_proprio.nom}}</value>
-                    </field>
-                    <field name="Champ_de_texte1[2]">
-                        <value>{{premier_proprio.profession}}</value>
-                    </field>
-                    <field name="Champ_de_texte1[6]">
-                        <value>{{premier_proprio.num_voie|default_if_none:""}}</value>
-                    </field>
-                    <field name="Champ_de_texte1[7]">
-                        <value>{{premier_proprio.extension|default_if_none:""}}</value>
-                    </field>
-                    <field name="Champ_de_texte1[8]">
-                        <value>{{premier_proprio.type_voie|default_if_none:""}}</value>
-                    </field>
-                    <field name="Champ_de_texte1[9]">
-                        <value>{{premier_proprio.nom_voie|default_if_none:""}}</value>
-                    </field>
-                    <field name="Champ_de_texte1[10]">
-                        <value>{{premier_proprio.lieu_dit|default_if_none:""}}</value>
-                    </field>
-                    <field name="Champ_de_texte1[11]">
-                        <value>{{premier_proprio.code_postal|default_if_none:""}}</value>
-                    </field>
-                    <field name="Champ_de_texte1[12]">
-                        <value>{{premier_proprio.localite|upper|default_if_none:""}}</value>
-                    </field>
+                        <field name="Champ_de_texte1[1]">
+                            <value>{{premier_proprio.nom}}</value>
+                        </field>
+                        <field name="Champ_de_texte1[2]">
+                            <value>{{premier_proprio.profession}}</value>
+                        </field>
+                        <field name="Champ_de_texte1[6]">
+                            <value>{{premier_proprio.num_voie|default_if_none:""}}</value>
+                        </field>
+                        <field name="Champ_de_texte1[7]">
+                            <value>{{premier_proprio.extension|default_if_none:""}}</value>
+                        </field>
+                        <field name="Champ_de_texte1[8]">
+                            <value>{{premier_proprio.type_voie|default_if_none:""}}</value>
+                        </field>
+                        <field name="Champ_de_texte1[9]">
+                            <value>{{premier_proprio.nom_voie|default_if_none:""}}</value>
+                        </field>
+                        <field name="Champ_de_texte1[10]">
+                            <value>{{premier_proprio.lieu_dit|default_if_none:""}}</value>
+                        </field>
+                        <field name="Champ_de_texte1[11]">
+                            <value>{{premier_proprio.code_postal|default_if_none:""}}</value>
+                        </field>
+                        <field name="Champ_de_texte1[12]">
+                            <value>{{premier_proprio.localite|upper|default_if_none:""}}</value>
+                        </field>
                     {% endwith %}
                 {% elif "Personne(s) morale(s)" in type_proprietaire %}
                     {% with premier_proprio=proprietaire_morale_raw|first %}
-                    <field name="Champ_de_texte1[3]">
-                        <value>{{premier_proprio.denomination}}</value>
-                    </field>
-                    <field name="Champ_de_texte1[4]">
-                        <value>{{premier_proprio.forme_juridique}}</value>
-                    </field>
-                    <field name="Champ_de_texte1[5]">
-                        <value>{{premier_proprio.representant}}</value>
-                    </field>
-                    <field name="Champ_de_texte1[6]">
-                        <value>{{premier_proprio.num_voie|default_if_none:""}}</value>
-                    </field>
-                    <field name="Champ_de_texte1[7]">
-                        <value>{{premier_proprio.extension|default_if_none:""}}</value>
-                    </field>
-                    <field name="Champ_de_texte1[8]">
-                        <value>{{premier_proprio.type_voie|default_if_none:""}}</value>
-                    </field>
-                    <field name="Champ_de_texte1[9]">
-                        <value>{{premier_proprio.nom_voie|default_if_none:""}}</value>
-                    </field>
-                    <field name="Champ_de_texte1[10]">
-                        <value>{{premier_proprio.lieu_dit|default_if_none:""}}</value>
-                    </field>
-                    <field name="Champ_de_texte1[11]">
-                        <value>{{premier_proprio.code_postal|default_if_none:""}}</value>
-                    </field>
-                    <field name="Champ_de_texte1[12]">
-                        <value>{{premier_proprio.localite|upper|default_if_none:""}}</value>
-                    </field>
+                        <field name="Champ_de_texte1[3]">
+                            <value>{{premier_proprio.denomination}}</value>
+                        </field>
+                        <field name="Champ_de_texte1[4]">
+                            <value>{{premier_proprio.forme_juridique}}</value>
+                        </field>
+                        <field name="Champ_de_texte1[5]">
+                            <value>{{premier_proprio.representant}}</value>
+                        </field>
+                        <field name="Champ_de_texte1[6]">
+                            <value>{{premier_proprio.num_voie|default_if_none:""}}</value>
+                        </field>
+                        <field name="Champ_de_texte1[7]">
+                            <value>{{premier_proprio.extension|default_if_none:""}}</value>
+                        </field>
+                        <field name="Champ_de_texte1[8]">
+                            <value>{{premier_proprio.type_voie|default_if_none:""}}</value>
+                        </field>
+                        <field name="Champ_de_texte1[9]">
+                            <value>{{premier_proprio.nom_voie|default_if_none:""}}</value>
+                        </field>
+                        <field name="Champ_de_texte1[10]">
+                            <value>{{premier_proprio.lieu_dit|default_if_none:""}}</value>
+                        </field>
+                        <field name="Champ_de_texte1[11]">
+                            <value>{{premier_proprio.code_postal|default_if_none:""}}</value>
+                        </field>
+                        <field name="Champ_de_texte1[12]">
+                            <value>{{premier_proprio.localite|upper|default_if_none:""}}</value>
+                        </field>
                     {% endwith %}
                 {% endif %}
                 <field name="Champ_de_texte1[13]">
@@ -362,7 +362,7 @@
                 </field>
                 {% if adresse_bien_indissociable %}
                 <field name="Champ_de_texte1[29]"> 
-                    <value>{{adresse_bien_indissociable_var_numero|default_if_none:""}} {{adresse_bien_indissociable_var_rue|default_if_none:""}},{{ adresse_bien_indissociable_var_ville|default_if_none:"" }} ({{ adresse_bien_indissociable_var_code_postal|default_if_none:"" }})</value>
+                    <value>{{ adresse_bien_indissociable|default_if_none:"" }}</value>
                 </field>
                 {% endif %}
                 {% if "Comptant à la signature de l'acte authentique" in modalite_paiement_raw %}
@@ -464,149 +464,160 @@
                 {% endif %}
             </field>
             <field name="Page3[0]">
-                <field name="Case_à_cocher1[0]">
-                    <value>apport en société</value>
-                </field>
-                <field name="Champ_de_texte1[0]">
-                    <value>apport société</value>
-                </field>
-                <field name="Champ_de_texte1[1]">
-                    <value>bénéficiaire</value>
-                </field>
-                <field name="Champ_de_texte1[2]">
-                    <value>estimation bien</value>
-                </field>
-                <field name="Champ_de_texte1[3]">
-                    <value>estimation terrain</value>
-                </field>
-                <field name="Case_à_cocher1[1]">
-                    <value>cession tantième</value>
-                </field>
-                <field name="Champ_de_texte1[4]">
-                    <value>cession tantième</value>
-                </field>
-                <field name="Champ_de_texte1[5]">
-                    <value>estimation locaux</value>
-                </field>
-                <field name="Case_à_cocher1[2]">
-                    <value>location-accession</value>
-                </field>
-                <field name="Champ_de_texte1[6]">
-                    <value>location-accession</value>
-                </field>
-                <field name="Case_à_cocher1[3]">
-                    <value>volontaire</value>
-                </field>
-                <field name="Case_à_cocher1[4]">
-                    <value>adjudication obligatoire</value>
-                </field>
-                <field name="Champ_de_texte1[7]">
-                    <value>adjudication obligatoire</value>
-                </field>
-                <field name="Case_à_cocher1[5]">
-                    <value>fin indivision</value>
-                </field>
-                <field name="Champ_de_texte1[8]">
-                    <value>fin indivision</value>
-                </field>
-                <field name="Champ_de_texte1[9]">
-                    <value>adjud. date</value>
-                </field>
-                <field name="Champ_de_texte1[10]">
-                    <value>adjud. mise prix</value>
-                </field>
-                <field name="Case_à_cocher1[6]">
-                    <value>soussignés déclarent 1</value>
-                </field>
-                <field name="Case_à_cocher1[7]">
-                    <value>soussigné décalrent 2</value>
-                </field>
+                {% if modalite_cession == "Vente amiable" %}
+                    {% if apport_societe == "Oui" %}
+                        <field name="Case_à_cocher1[0]">
+                            <value>1</value>
+                        </field>
+                        <field name="Champ_de_texte1[1]">
+                            <value>{{ apport_beneficiaire|default_if_none:"" }}</value>
+                        </field>
+                        <field name="Champ_de_texte1[2]">
+                            <value>{{ apport_estimation|default_if_none:"" }}</value>
+                        </field>
+                    {% endif %}
+                    {% if cession == "Oui" %}
+                        <field name="Case_à_cocher1[1]">
+                            <value>1</value>
+                        </field>
+                        <field name="Champ_de_texte1[3]">
+                            <value>{{ cession_estimation_terrain|default_if_none:"" }}</value>
+                        </field>
+                        <field name="Champ_de_texte1[5]">
+                            <value>{{ cession_estimation_locaux|default_if_none:"" }}</value>
+                        </field>
+                    {% endif %}
+                    {% if location_accession == "Oui" %}
+                        <field name="Case_à_cocher1[2]">
+                            <value>1</value>
+                        </field>
+                        <field name="Champ_de_texte1[6]">
+                            <value>{{ location_accession_estimation }}</value>
+                        </field>
+                    {% endif %}
+                {% else %}
+                    {% if adjudication_volontaire == "Oui" %}
+                        <field name="Case_à_cocher1[3]">
+                            <value>1</value>
+                        </field>
+                    {% endif %}
+                    {% if adjudication_obligatoire == "Oui" %}
+                        <field name="Case_à_cocher1[4]">
+                            <value>1</value>
+                        </field>
+                    {% endif %}
+                    {% if adjudication_indivision == "Oui" %}
+                        <field name="Case_à_cocher1[5]">
+                            <value>1</value>
+                        </field>
+                    {% endif %}
+                    <field name="Champ_de_texte1[9]">
+                        <value>{{ adjudication_date|default_if_none:"" }}</value>
+                    </field>
+                    <field name="Champ_de_texte1[10]">
+                        <value>{{ adjudication_montant|default_if_none:"" }}</value>
+                    </field>
+                {% endif %}
+                {% if "Demande(nt) au titulaire du droit de préemption d'acquérir les biens désignés à la rubrique 3 aux prix et conditions indiqués (*)" in declaration_raw %}
+                    <field name="Case_à_cocher1[6]">
+                        <value>1</value>
+                    </field>
+                {% endif %}
+                {% if "A(ont) recherché un acquéreur disposé à acquérir les biens désignés à la rubrique 3 aux prix et conditions indiqués" in declaration_raw %}
+                    <field name="Case_à_cocher1[7]">
+                        <value>1</value>
+                    </field>
+                {% endif %}
                 <field name="Champ_de_texte1[11]">
-                    <value>acquereur nom prénom</value>
+                    <value>{{ nom_acquereur|default_if_none:"" }}</value>
                 </field>
                 <field name="Champ_de_texte1[12]">
-                    <value>acquéreur profession</value>
+                    <value>{{ profession_acquereur|default_if_none:"" }}</value>
                 </field>
-                <field name="Champ_de_texte1[13]">
-                    <value>adresse num</value>
-                </field>
-                <field name="Champ_de_texte1[14]">
-                    <value>adresse extension</value>
-                </field>
-                <field name="Champ_de_texte1[15]">
-                    <value>adresse type</value>
-                </field>
-                <field name="Champ_de_texte1[16]">
-                    <value>adresse nom</value>
-                </field>
-                <field name="Champ_de_texte1[17]">
-                    <value>adresse BP</value>
-                </field>
-                <field name="Champ_de_texte1[18]">
-                    <value>adresse CP</value>
-                </field>
-                <field name="Champ_de_texte1[19]">
-                    <value>Adresse localité</value>
-                </field>
+                {% if adresse_acquereur_raw %}
+                    {% with acquereur_adresse=adresse_acquereur_raw|first %}
+                        <field name="Champ_de_texte1[13]">
+                            <value>{{ acquereur_adresse.numero|default_if_none:"" }}</value>
+                        </field>
+                        <field name="Champ_de_texte1[14]">
+                            <value>{# extension #}</value>
+                        </field>
+                        <field name="Champ_de_texte1[15]">
+                            <value>{# bien type voie #}</value>
+                        </field>
+                        <field name="Champ_de_texte1[16]">
+                            <value>{{ acquereur_adresse.rue|default_if_none:""}}</value>
+                        </field>
+                        <field name="Champ_de_texte1[17]">
+                            <value>{# bien BP #}</value>
+                        </field>
+                        <field name="Champ_de_texte1[18]">
+                            <value>{{ acquereur_adresse.code_postal|default_if_none:"" }}</value>
+                        </field>
+                        <field name="Champ_de_texte1[19]">
+                            <value>{{ acquereur_adresse.ville|default_if_none:"" }}</value>
+                        </field>
+                    {% endwith %}
+                {% endif %}
                 <field name="Champ_de_texte1[20]">
-                    <value>adresse indications complémentaires</value>
+                    <value>{{ info_complementaire_acquereur|default_if_none:"" }}</value>
                 </field>
-                <field name="Case_à_cocher1[8]">
-                    <value>sousignés déclarent vente adjudication</value>
-                </field>
+                {% if declaration_vente == "True" %}
+                    <field name="Case_à_cocher1[8]">
+                        <value>1</value>
+                    </field>
+                {% endif %}
                 <field name="Champ_de_texte1[21]">
-                    <value>signature lieu</value>
+                    <value>{{ declaration_lieu }}</value>
                 </field>
                 <field name="Champ_de_texte1[22]">
-                    <value>signature date</value>
+                    <value>{{ declaration_date }}</value>
                 </field>
-                <field name="Champ_de_texte1[23]">
-                    <value>cachet</value>
-                </field>
-                <field name="Champ_de_texte1[24]">
-                    <value>signataire nom prénom</value>
-                </field>
-                <field name="Champ_de_texte1[25]">
-                    <value>signataire qualité</value>
-                </field>
-                <field name="Champ_de_texte1[26]">
-                    <value>signat. num</value>
-                </field>
-                <field name="Champ_de_texte1[27]">
-                    <value>signat. extension</value>
-                </field>
-                <field name="Champ_de_texte1[28]">
-                    <value>signat. type</value>
-                </field>
-                <field name="Champ_de_texte1[29]">
-                    <value>signat. nom</value>
-                </field>
-                <field name="Champ_de_texte1[30]">
-                    <value>signat. BP</value>
-                </field>
-                <field name="Champ_de_texte1[31]">
-                    <value>signat. CP</value>
-                </field>
-                <field name="Champ_de_texte1[32]">
-                    <value>signat. localité</value>
-                </field>
-                <field name="Case_à_cocher1[9]">
-                    <value>notif A</value>
-                </field>
-                <field name="Champ_de_texte1[33]">
-                    <value>notif A</value>
-                </field>
-                <field name="Case_à_cocher1[10]">
-                    <value>notif H</value>
-                </field>
-                <field name="Champ_de_texte1[34]">
-                    <value>notif H</value>
-                </field>
+                {% if signataire == "Oui" %}
+                    <field name="Champ_de_texte1[24]">
+                        <value>{{ signataire_nom|default_if_none:"" }}</value>
+                    </field>
+                    <field name="Champ_de_texte1[25]">
+                        <value>{{ signataire_qualite|default_if_none:"" }}</value>
+                    </field>
+                    {% if adresse_signataire_raw %}
+                        {% with signataire_adresse=adresse_signataire_raw|first %}
+                            <field name="Champ_de_texte1[26]">
+                                <value>{{ signataire_adresse.numero|default_if_none:"" }}</value>
+                            </field>
+                            <field name="Champ_de_texte1[27]">
+                                <value>{# extension #}</value>
+                            </field>
+                            <field name="Champ_de_texte1[28]">
+                                <value>{# type rue #}</value>
+                            </field>
+                            <field name="Champ_de_texte1[29]">
+                                <value>{{ signataire_adresse.rue|default_if_none:"" }}</value>
+                            </field>
+                            <field name="Champ_de_texte1[30]">
+                                <value>{# BP #}</value>
+                            </field>
+                            <field name="Champ_de_texte1[31]">
+                                <value>{{ signataire_adresse.code_postal|default_if_none:"" }}</value>
+                            </field>
+                            <field name="Champ_de_texte1[32]">
+                                <value>{{ signataire_adresse.ville|default_if_none:"" }}</value>
+                            </field>
+                        {% endwith %}
+                    {% endif %}
+                {% endif %}
+                {% if "A l’adresse du (des) propriétaire(s) mentionné(s) à la rubrique A" in notification_raw %}
+                    <field name="Case_à_cocher1[9]">
+                        <value>1</value>
+                    </field>
+                {% endif %}
+                {% if "A l’adresse du mandataire mentionnée à la rubrique H, adresse où le(s) propriétaire(s) a (ont) fait élection de domicile" in notification_raw %}
+                    <field name="Case_à_cocher1[10]">
+                        <value>1</value>
+                    </field>
+                {% endif %}
                 <field name="Champ_de_texte1[35]">
-                    <value>observations</value>
-                </field>
-                <field name="Champ_de_texte1[36]">
-                    <value>titulaire droit préemption</value>
+                    <value>{{ observations|default_if_none:"" }}</value>
                 </field>
             </field>
         </field>

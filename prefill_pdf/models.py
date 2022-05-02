@@ -45,7 +45,7 @@ class Prefill_PDF(BaseResource):
             raise APIError('Invalid payload format: json expected')
 
         xfdf_data = render_to_string('data.xfdf', payload.get('fields'))    # remplace les variables de data.xfdf par les bonnes valeurs des données
-        self.logger.info(f"xfdf_data : {xfdf_data}")    #logout du webservice
+        #self.logger.info(f"xfdf_data : {xfdf_data}")    #logout du webservice
 
         filename = 'cerfa_10072-02.pdf'
         filename_path = os.path.join(template_dir, filename)
