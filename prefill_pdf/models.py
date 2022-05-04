@@ -40,6 +40,7 @@ class Prefill_PDF(BaseResource):
     def clear_ws_json(self, request):
         return {}
     
+    
     @endpoint(
         name="prefill",
         methods=["post"],
@@ -61,16 +62,27 @@ class Prefill_PDF(BaseResource):
         # Serialize in JSON a base64 encoded data
         # https://stackoverflow.com/a/37239382
         self.logger.info(f"filled_pdf : {filled_pdf}")
-        with open(filled_pdf, 'rb') as open_file:
+
+        stamp = 'calque.pdf'
+        stamp_path = os.path.join(template_dir,stamp)
+        stamped_pdf = utils.stamp(filled_pdf, stamp_path, output_pdf_path=tmp_dir)
+        self.logger.info(f"stamped_pdf : {stamped_pdf}")
+
+        # with open(filled_pdf, 'rb') as open_file:
+        #     byte_content = open_file.read()
+        # base64_bytes = base64.b64encode(byte_content)
+
+        with open(stamped_pdf, 'rb') as open_file:
             byte_content = open_file.read()
         base64_bytes = base64.b64encode(byte_content)
         # base64_string = base64_bytes.decode('utf-8')
         # base64_string = base64_bytes.decode('ascii')
         file_payload = {}
-        file_payload['file'] = {'content_type': 'application/pdf', 'filename': 'cerfa_10072-02_prerempli.pdf'}
+        file_payload['file'] = {'content_type': 'application/pdf', 'filename': 'cerfa_10072-02_prerempli_stamped.pdf'}
         # file_payload['file']['b64_content'] = base64_string
         file_payload['file']['b64_content'] = force_text(base64_bytes, encoding='ascii')
 
         os.remove(filled_pdf)
+        os.remove(stamped_pdf)
 
         return file_payload
