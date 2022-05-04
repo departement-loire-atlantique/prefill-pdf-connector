@@ -24,11 +24,19 @@ class Prefill_PDF(BaseResource):
 
     api_description = "API de remplissage de fichier PDF remplissable avec les données d'un formulaire"
 
-    @endpoint()
+    @endpoint(
+        name="info",
+        methods=["get"],
+        description=ugettext_lazy("Hello world"),
+    )
     def info(self, request):
         return{'hello' : 'Bonjour Prefill'}
         
-    @endpoint()
+    @endpoint(
+        name="clear_ws_json",
+        methods=["get"],
+        description=ugettext_lazy("Suppression du fichier json de retour d'un appel de webservice pour pouvoir relancer la commande prefill sans erreur")
+    )
     def clear_ws_json(self, request):
         return {}
     
