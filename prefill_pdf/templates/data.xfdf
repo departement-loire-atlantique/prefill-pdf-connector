@@ -4,30 +4,40 @@
     <fields>
         <field name="topmostSubform[0]">
             <field name="Page1[0]">
-                <field name="Case_à_cocher1[0]">
-                    <value>{% if type_cerfa == "Faire une déclaration d’intention d’aliéner un bien" %}1{% endif %}</value>
-                </field>
-                <field name="Case_à_cocher1[1]">
-                    <value>{% if type_cerfa == "Faire une demande d’acquisition d’un bien" %}1{% endif %}</value>
-                </field>
-                <field name="Case_à_cocher1[2]">
-                    <value>{% if type_DIA == "Soumis au droit de préemption urbain (D.P.U) (articles L. 211-1 et suivants du Code de l’urbanisme (2))" %}1{% endif %}</value>
-                </field>
-                <field name="Case_à_cocher1[3]">
-                    <value>{% if type_DIA == "Compris dans une zone d’aménagement différé (Z.A.D.) (articles L.212-1- et suivants du Code de l’urbanisme (3))" %}1{% endif %}</value>
-                </field>
-                <field name="Case_à_cocher1[4]">
-                    <value>{% if type_DIA == "Compris dans une zone de préemption délimitée au titre des espaces naturels sensibles de départements (articles L. 142-1- et suivants du Code de l’urbanisme(4))" %}1{% endif %}</value>
-                </field>
-                <field name="Case_à_cocher1[5]">
-                    <value>{% if type_DIA == "Soumis au droit de préemption urbain (D.P.U.) (2)" %}1{% endif %}</value>
-                </field>
-                <field name="Case_à_cocher1[6]">
-                    <value>{% if type_DIA == "Compris dans une zone d’aménagement différé (Z.A.D.) (3)" %}1{% endif %}</value>
-                </field>
-                <field name="Champ_de_texte1[0]">
-                    <value></value>
-                </field>
+                {% if type_cerfa == "Faire une déclaration d’intention d’aliéner un bien" %}
+                    <field name="Case_à_cocher1[0]">
+                        <value>1</value>
+                    </field>
+                {% elif type_cerfa == "Faire une demande d’acquisition d’un bien" %}
+                    <field name="Case_à_cocher1[1]">
+                        <value>1</value>
+                    </field>
+                {% endif %}
+                {% if "Soumis au droit de préemption urbain (D.P.U) (articles L. 211-1 et suivants du Code de l’urbanisme (2))" in type_DIA %}
+                    <field name="Case_à_cocher1[2]">
+                        <value>1</value>
+                    </field>
+                {% endif %}
+                {% if "Compris dans une zone d’aménagement différé (Z.A.D.) (articles L.212-1- et suivants du Code de l’urbanisme (3))" in type_DIA %}
+                    <field name="Case_à_cocher1[3]">
+                        <value>1</value>
+                    </field>
+                {% endif %}
+                {% if "Compris dans une zone de préemption délimitée au titre des espaces naturels sensibles de départements (articles L. 142-1- et suivants du Code de l’urbanisme(4))" in type_DIA %}
+                    <field name="Case_à_cocher1[4]">
+                        <value>1</value>
+                    </field>
+                {% endif %}
+                {% if "Soumis au droit de préemption urbain (D.P.U.) (2)" in type_DIA %}
+                    <field name="Case_à_cocher1[5]">
+                        <value>1</value>
+                    </field>
+                {% endif %}
+                {% if "Compris dans une zone d’aménagement différé (Z.A.D.) (3)" in type_DIA %}
+                    <field name="Case_à_cocher1[6]">
+                        <value>1</value>
+                    </field>
+                {% endif %}
                 {% if "Personne(s) physique(s)" in type_proprietaire %}
                     {% with premier_proprio=proprietaire_physique_raw|first %}
                         <field name="Champ_de_texte1[1]">
