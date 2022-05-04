@@ -76,3 +76,25 @@ def gen_xfdf_file(xfdf_data, tmp_dir=None):
     f.write((xfdf_data.encode("UTF-8")))
     f.close()
     return out_file
+
+
+def stamp(pdf_path, stamp_pdf_path, out_file=None, output_pdf_path=None):
+    '''
+    Applies a stamp (from stamp_pdf_path) to the PDF file in pdf_path. Useful for watermark purposes.
+    If not output_pdf_path is provided, it returns a temporary file with the result PDF.
+    '''
+    handle = None
+    if not out_file:
+        cleanOnFail = True
+        handle, out_file = tempfile.mkstemp(dir=output_pdf_path)
+
+    cmd = "%s %s multistamp %s output %s" % (PDFTK_PATH, pdf_path, stamp_pdf_path, out_file)
+    try :
+        run_command(cmd,True)
+    except :
+        raise
+    finally :
+        if handle :
+            os.close(handle)
+            
+    return out_file
