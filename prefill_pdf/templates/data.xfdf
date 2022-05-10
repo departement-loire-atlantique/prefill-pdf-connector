@@ -583,6 +583,15 @@
                 <field name="Champ_de_texte1[22]">
                     <value>{{ declaration_date }}</value>
                 </field>
+                <field name="Champ_de_texte1[23]">
+                    {% if signataire == "Oui" %}
+                        <value>{{ signataire_nom }} {% if signataire_qualite %}({{ signataire_qualite }}){% endif %}</value>
+                    {% else %}
+                        {% with proprietaires=proprietaire_morale_raw|add:proprietaire_physique_raw %}
+                    <value>{% for personne in proprietaires %}{% if forloop.counter0 < proprietaire_morale_raw|length %}{{ personne.representant }} ({{ personne.denomination }}){% else %}{{ personne.nom|default:"" }}{% endif %}{% if not forloop.last %}, {% endif %}{% endfor %}</value>
+                        {% endwith %}
+                    {% endif %}
+                </filed>
                 {% if signataire == "Oui" %}
                     <field name="Champ_de_texte1[24]">
                         <value>{{ signataire_nom|default_if_none:"" }}</value>
