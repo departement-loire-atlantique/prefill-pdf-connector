@@ -591,13 +591,13 @@
                     <value>{% for personne in proprietaires %}{% if forloop.counter0 < proprietaire_morale_raw|length %}{{ personne.representant }} ({{ personne.denomination }}){% else %}{{ personne.nom|default:"" }}{% endif %}{% if not forloop.last %}, {% endif %}{% endfor %}</value>
                         {% endwith %}
                     {% endif %}
-                </filed>
+                </field>
                 {% if signataire == "Oui" %}
                     <field name="Champ_de_texte1[24]">
-                        <value>{{ signataire_nom|default_if_none:"" }}</value>
+                        <value>{{ signataire_nom }}</value>
                     </field>
                     <field name="Champ_de_texte1[25]">
-                        <value>{{ signataire_qualite|default_if_none:"" }}</value>
+                        <value>{{ signataire_qualite }}</value>
                     </field>
                     {% if adresse_signataire_raw %}
                         {% with signataire_adresse=adresse_signataire_raw|first %}

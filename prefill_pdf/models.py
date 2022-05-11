@@ -44,12 +44,20 @@ class Prefill_PDF(BaseResource):
         name="prefill",
         methods=["post"],
         description=ugettext_lazy("Appel de remplissage de PDF"),
+        parameters={
+            "stamp_id": {
+                "description": "id du fichier tampon .pdf si il existe",
+                "exemple_value": "stamp",
+                "required": False,
+            }
+        },
     )
-    def prefill(self, request, *args, **kwargs):
+    def prefill(self, request, stamp_id = None):
         self.logger.info(f"DEBUG prefill")
         try:
             payload = json_loads(request.body)      #recupère les données du formulaire Publik rempli
-            payload_calque_file = payload.get('workflow').get('fields').get('calque').get('content')
+            if stamp_id :
+                payload_stamp_content = payload.get('workflow').get('fields').get(stamp_id).get('content')
         except (ValueError,):
             raise APIError('Invalid payload format: json expected')
 
@@ -63,26 +71,30 @@ class Prefill_PDF(BaseResource):
         # https://stackoverflow.com/a/37239382
         self.logger.info(f"filled_pdf : {filled_pdf}")
 
-        stamp = 'calque.pdf'
-        stamp_path = os.path.join(template_dir,stamp)
-        with open(stamp_path, 'wb') as out_file:
-            out_file.write(base64.b64decode(payload_calque_file))
-        self.logger.info(f"stamp file: {stamp_path}")
+        if stamp_id :
+            stamp_path = os.path.join(template_dir,'calque.pdf')
+            with open(stamp_path, 'wb') as out_file:
+                out_file.write(base64.b64decode(payload_stamp_content))
+            self.logger.info(f"stamp file: {stamp_path}")
 
-        stamped_pdf = utils.stamp(filled_pdf, stamp_path, output_pdf_path=tmp_dir)
-        self.logger.info(f"stamped_pdf : {stamped_pdf}")
+            stamped_pdf = utils.stamp(filled_pdf, stamp_path, output_pdf_path=tmp_dir)
+            self.logger.info(f"stamped_pdf : {stamped_pdf}")
+            
+            os.remove(stamp_path)
+            os.remove(filled_pdf)
+        else :
+            stamped_pdf = None
 
-        with open(stamped_pdf, 'rb') as open_file:
+
+        with open(stamped_pdf or filled_pdf, 'rb') as open_file:
             byte_content = open_file.read()
         base64_bytes = base64.b64encode(byte_content)
+        os.remove(stamped_pdf or filled_pdf)
         
         file_payload = {}
         file_payload['file'] = {'content_type': 'application/pdf', 'filename': 'cerfa_10072-02_prerempli_stamped.pdf'}
         file_payload['file']['b64_content'] = force_text(base64_bytes, encoding='ascii')
 
-        os.remove(stamp_path)
-        os.remove(filled_pdf)
-        os.remove(stamped_pdf)
 
         return file_payload
 
