@@ -64,23 +64,23 @@ class Prefill_PDF(BaseResource):
         xfdf_data = render_to_string('data.xfdf', payload.get('fields'))    # remplace les variables de data.xfdf par les bonnes valeurs des données
         #self.logger.info(f"xfdf_data : {xfdf_data}")    #logout du webservice
 
-        filename = 'cerfa_10072-02.pdf'
-        filename_path = os.path.join(template_dir, filename)
-        filled_pdf = utils.fill_form(filename_path, xfdf_data=xfdf_data, tmp_dir=tmp_dir)
+        cerfa_name = 'cerfa_10072-02.pdf'
+        cerfa_file = os.path.join(template_dir, cerfa_name)
+        filled_pdf = utils.fill_form(cerfa_file, xfdf_data=xfdf_data, tmp_dir=tmp_dir)
         # Serialize in JSON a base64 encoded data
         # https://stackoverflow.com/a/37239382
         self.logger.info(f"filled_pdf : {filled_pdf}")
 
         if stamp_id :
-            stamp_path = os.path.join(template_dir,'calque.pdf')
-            with open(stamp_path, 'wb') as out_file:
+            stamp_file = os.path.join(template_dir,'calque.pdf')
+            with open(stamp_file, 'wb') as out_file:
                 out_file.write(base64.b64decode(payload_stamp_content))
-            self.logger.info(f"stamp file: {stamp_path}")
+            self.logger.info(f"stamp file: {stamp_file}")
 
-            stamped_pdf = utils.stamp(filled_pdf, stamp_path, output_pdf_path=tmp_dir)
+            stamped_pdf = utils.stamp(filled_pdf, stamp_file, output_pdf_path=tmp_dir)
             self.logger.info(f"stamped_pdf : {stamped_pdf}")
             
-            os.remove(stamp_path)
+            os.remove(stamp_file)
             os.remove(filled_pdf)
         else :
             stamped_pdf = None
@@ -92,7 +92,7 @@ class Prefill_PDF(BaseResource):
         os.remove(stamped_pdf or filled_pdf)
         
         file_payload = {}
-        file_payload['file'] = {'content_type': 'application/pdf', 'filename': 'cerfa_10072-02_prerempli_stamped.pdf'}
+        file_payload['file'] = {'content_type': 'application/pdf', 'cerfa_name': 'cerfa_10072-02_prerempli_stamped.pdf'}
         file_payload['file']['b64_content'] = force_text(base64_bytes, encoding='ascii')
 
 
