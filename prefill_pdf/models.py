@@ -92,7 +92,7 @@ class Prefill_PDF(BaseResource):
         os.remove(stamped_pdf or filled_pdf)
         
         file_payload = {}
-        file_payload['file'] = {'content_type': 'application/pdf', 'cerfa_name': 'cerfa_10072-02_prerempli_stamped.pdf'}
+        file_payload['file'] = {'content_type': 'application/pdf', 'filename': 'cerfa_10072-02_prerempli_stamped.pdf'}
         file_payload['file']['b64_content'] = force_text(base64_bytes, encoding='ascii')
 
 
