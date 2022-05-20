@@ -49,52 +49,76 @@ class Prefill_PDF(BaseResource):
                 "description": "id du fichier tampon .pdf si il existe",
                 "exemple_value": "stamp",
                 "required": False,
+            },
+            "appendix_id": {
+                "description": "id de l'annexe .pdf  à fusionner si elle existe",
+                "exemple_value": "appendix",
+                "required": False,
             }
         },
     )
-    def prefill(self, request, stamp_id = None):
+    def prefill(self, request, stamp_id = None, appendix_id = None):
         self.logger.info(f"DEBUG prefill")
+        
+
         try:
             payload = json_loads(request.body)      #recupère les données du formulaire Publik rempli
             if stamp_id :
                 payload_stamp_content = payload.get('workflow').get('fields').get(stamp_id).get('content')
+            if appendix_id :
+                payload_appendix_content = payload.get('workflow').get('fields').get(appendix_id).get('content')
         except (ValueError,):
             raise APIError('Invalid payload format: json expected')
 
         xfdf_data = render_to_string('data.xfdf', payload.get('fields'))    # remplace les variables de data.xfdf par les bonnes valeurs des données
-        #self.logger.info(f"xfdf_data : {xfdf_data}")    #logout du webservice
+        self.logger.info("xfdf_data : render to string")    #logout du webservice
 
         cerfa_name = 'cerfa_10072-02.pdf'
         cerfa_file = os.path.join(template_dir, cerfa_name)
         filled_pdf = utils.fill_form(cerfa_file, xfdf_data=xfdf_data, tmp_dir=tmp_dir)
         # Serialize in JSON a base64 encoded data
         # https://stackoverflow.com/a/37239382
-        self.logger.info(f"filled_pdf : {filled_pdf}")
+        self.logger.info(f"filled_pdf : create pdf with request data")
 
         if stamp_id :
-            stamp_file = os.path.join(template_dir,'calque.pdf')
+            stamp_file = os.path.join(template_dir,'stamp.pdf')
             with open(stamp_file, 'wb') as out_file:
                 out_file.write(base64.b64decode(payload_stamp_content))
-            self.logger.info(f"stamp file: {stamp_file}")
+            self.logger.info("stamp_file: create temporary pdf file with stamp")
 
-            stamped_pdf = utils.stamp(filled_pdf, stamp_file, output_pdf_path=tmp_dir)
-            self.logger.info(f"stamped_pdf : {stamped_pdf}")
+            stamped_pdf = utils.stamp(filled_pdf, stamp_file, output_pdf=tmp_dir)
+            self.logger.info("stamped_pdf : add stamp in filled pdf")
             
             os.remove(stamp_file)
             os.remove(filled_pdf)
         else :
             stamped_pdf = None
 
+        if appendix_id :
+            appendix_file = os.path.join(template_dir,'appendix.pdf')
+            with open(appendix_file,'wb') as out_file :
+                out_file.write(base64.b64decode(payload_appendix_content))
+            self.logger.info("appendix_file : create temporary pdf file with appendix")
 
-        with open(stamped_pdf or filled_pdf, 'rb') as open_file:
+            pdf_with_appendix = utils.concat([stamped_pdf or filled_pdf,appendix_file], output_pdf=tmp_dir)
+            self.logger.info("pdf_with_appendix : add appendix in filled pdf or stamped pdf")
+
+            os.remove(appendix_file)
+            os.remove(stamped_pdf or filled_pdf)
+        else :
+            pdf_with_appendix = None
+
+        with open(pdf_with_appendix or stamped_pdf or filled_pdf, 'rb') as open_file:
             byte_content = open_file.read()
         base64_bytes = base64.b64encode(byte_content)
-        os.remove(stamped_pdf or filled_pdf)
+        os.remove(pdf_with_appendix or stamped_pdf or filled_pdf)
         
         file_payload = {}
-        file_payload['file'] = {'content_type': 'application/pdf', 'cerfa_name': 'cerfa_10072-02_prerempli_stamped.pdf'}
+        file_payload['file'] = {'content_type': 'application/pdf', 'filename': 'cerfa_10072-02_prerempli_stamped.pdf'}
         file_payload['file']['b64_content'] = force_text(base64_bytes, encoding='ascii')
+        self.logger.info(f"file_payload : dict with final pdf file ")
 
 
         return file_payload
+
 

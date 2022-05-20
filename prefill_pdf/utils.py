@@ -39,7 +39,7 @@ except OSError:
     logging.warning("pdftk test call failed (PDFTK_PATH=%r).", PDFTK_PATH)
 
 
-def fill_form(pdf_path, xfdf_data="", out_file=None, flatten=True, drop_xfa=False, tmp_dir=None):
+def fill_form(pdf_file, xfdf_data="", out_file=None, flatten=True, drop_xfa=False, tmp_dir=None):
     """
     Fills a PDF form with given XFDF input data.
     Return temp file if no out_file provided.
@@ -51,7 +51,7 @@ def fill_form(pdf_path, xfdf_data="", out_file=None, flatten=True, drop_xfa=Fals
         cleanOnFail = True
         handle, out_file = tempfile.mkstemp(dir=tmp_dir)
 
-    cmd = "%s %s fill_form %s output %s" % (PDFTK_PATH, pdf_path, tmp_fdf, out_file)
+    cmd = "%s %s fill_form %s output %s" % (PDFTK_PATH, pdf_file, tmp_fdf, out_file)
     if flatten:
         cmd += " flatten"
     if drop_xfa:
@@ -78,17 +78,16 @@ def gen_xfdf_file(xfdf_data, tmp_dir=None):
     return out_file
 
 
-def stamp(pdf_path, stamp_pdf_path, out_file=None, output_pdf_path=None):
+def stamp(pdf_file, stamp_pdf_file, out_file=None, output_pdf=None):
     '''
-    Applies a stamp (from stamp_pdf_path) to the PDF file in pdf_path. Useful for watermark purposes.
-    If not output_pdf_path is provided, it returns a temporary file with the result PDF.
+    Applies a stamp (from stamp_pdf_file) to the PDF file in pdf_file. Useful for watermark purposes.
+    If not output_pdf is provided, it returns a temporary file with the result PDF.
     '''
     handle = None
     if not out_file:
-        cleanOnFail = True
-        handle, out_file = tempfile.mkstemp(dir=output_pdf_path)
+        handle, out_file = tempfile.mkstemp(dir=output_pdf)
 
-    cmd = "%s %s multistamp %s output %s" % (PDFTK_PATH, pdf_path, stamp_pdf_path, out_file)
+    cmd = "%s %s multistamp %s output %s" % (PDFTK_PATH, pdf_file, stamp_pdf_file, out_file)
     try :
         run_command(cmd,True)
     except :
@@ -97,4 +96,29 @@ def stamp(pdf_path, stamp_pdf_path, out_file=None, output_pdf_path=None):
         if handle :
             os.close(handle)
             
+    return out_file
+
+
+def concat(files, out_file=None, output_pdf=None):
+    '''
+        Merge multiples PDF files.
+        Return temp file if no out_file provided.
+    '''
+    cleanOnFail = False
+    handle = None
+    if not out_file:
+        cleanOnFail = True
+        handle, out_file = tempfile.mkstemp(dir=output_pdf)
+        
+    cmd = "%s %s cat output %s" % (PDFTK_PATH, ' '.join(files), out_file)
+    try:
+        run_command(cmd,True)
+    except:
+        if cleanOnFail:
+            os.remove(out_file)
+        raise
+    finally:
+        if handle:
+            os.close(handle)
+
     return out_file

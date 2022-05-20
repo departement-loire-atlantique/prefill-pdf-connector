@@ -44,7 +44,7 @@
                             <value>{{premier_proprio.nom}}</value>
                         </field>
                         <field name="Champ_de_texte1[2]">
-                            <value>{{premier_proprio.profession}}</value>
+                            <value>{{premier_proprio.profession|default_if_none:""}}</value>
                         </field>
                         <field name="Champ_de_texte1[6]">
                             <value>{{premier_proprio.num_voie|default_if_none:""}}</value>
