@@ -1,0 +1,1 @@
+INSTALLED_APPS += ('prefill_pdf',)
