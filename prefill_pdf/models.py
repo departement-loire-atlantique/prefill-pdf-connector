@@ -1,11 +1,11 @@
 import os
+import json
 import base64
 
 from passerelle.base.models import BaseResource
 from passerelle.utils.api import endpoint
 
 from passerelle.utils.jsonresponse import APIError
-from passerelle.compat import json_loads
 from django.template.loader import render_to_string
 from django.utils.translation import ugettext_lazy
 from django.utils.encoding import force_bytes, force_text
@@ -43,7 +43,7 @@ class Prefill_PDF(BaseResource):
     @endpoint(
         name="prefill",
         methods=["post"],
-        description=ugettext_lazy("Appel de remplissage de PDF"),
+        description=ugettext_lazy("Appel de remplissage de PDF (récupération de l'ensemble des données de la demande)"),
         parameters={
             "stamp_id": {
                 "description": "id du fichier tampon .pdf si il existe",
@@ -62,11 +62,24 @@ class Prefill_PDF(BaseResource):
         
 
         try:
-            payload = json_loads(request.body)      #recupère les données du formulaire Publik rempli
-            if stamp_id :
-                payload_stamp_content = payload.get('workflow').get('fields').get(stamp_id).get('content')
-            if appendix_id :
-                payload_appendix_content = payload.get('workflow').get('fields').get(appendix_id).get('content')
+            payload = json.loads(request.body)      #recupère les données du formulaire Publik rempli
+            if 'fields' not in payload :
+                raise APIError('missing fields')
+            if 'workflow' not in payload or 'fields' not in payload.get('workflow') :
+                raise APIError("missing workflow or fields in workflow")
+            else :
+                if stamp_id :
+                    if stamp_id in payload.get('workflow').get('fields') :
+                        payload_stamp_content = payload.get('workflow').get('fields').get(stamp_id).get('content')
+                    else :
+                        self.logger.warning(f"{stamp_id} : missing element")
+                        stamp_id = None
+                if appendix_id :
+                    if appendix_id in payload.get('workflow').get('fields') :
+                        payload_appendix_content = payload.get('workflow').get('fields').get(appendix_id).get('content')
+                    else :
+                        self.logger.warning(f"{appendix_id} : missing element")
+                        appendix_id = None
         except (ValueError,):
             raise APIError('Invalid payload format: json expected')
 
@@ -116,7 +129,7 @@ class Prefill_PDF(BaseResource):
         file_payload = {}
         file_payload['file'] = {'content_type': 'application/pdf', 'filename': 'cerfa_10072-02_prerempli_stamped.pdf'}
         file_payload['file']['b64_content'] = force_text(base64_bytes, encoding='ascii')
-        self.logger.info(f"file_payload : dict with final pdf file ")
+        self.logger.info("file_payload : dict with final pdf file ")
 
 
         return file_payload
