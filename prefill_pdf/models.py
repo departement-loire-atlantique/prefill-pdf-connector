@@ -14,7 +14,7 @@ from . import utils
 
 base_dir = os.path.dirname(__file__)
 template_dir = os.path.join(base_dir, 'templates')
-tmp_dir = os.path.join(base_dir, 'tmp')
+tmp_dir = "/tmp"
 
 class Prefill_PDF(BaseResource):
     category = 'Divers'
