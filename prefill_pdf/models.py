@@ -94,7 +94,7 @@ class Prefill_PDF(BaseResource):
         self.logger.info(f"filled_pdf : create pdf with request data")
 
         if stamp_id :
-            stamp_file = os.path.join(template_dir,'stamp.pdf')
+            stamp_file = os.path.join(tmp_dir,'stamp.pdf')
             with open(stamp_file, 'wb') as out_file:
                 out_file.write(base64.b64decode(payload_stamp_content))
             self.logger.info("stamp_file: create temporary pdf file with stamp")
@@ -108,7 +108,7 @@ class Prefill_PDF(BaseResource):
             stamped_pdf = None
 
         if appendix_id :
-            appendix_file = os.path.join(template_dir,'appendix.pdf')
+            appendix_file = os.path.join(tmp_dir,'appendix.pdf')
             with open(appendix_file,'wb') as out_file :
                 out_file.write(base64.b64decode(payload_appendix_content))
             self.logger.info("appendix_file : create temporary pdf file with appendix")
