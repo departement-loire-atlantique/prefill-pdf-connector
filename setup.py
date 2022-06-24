@@ -7,7 +7,6 @@ setup(
     author='Julie LANIAU',
     author_email='julie.laniau@loire-atlantique.fr',
     url='https://gitlab.loire-atlantique.fr/developpement/publik/prefill-pdf-connector',
-    packages=find_packages(where="prefill_pdf"),
-    package_dir={"": "prefill_pdf"},
+    packages=find_packages(),
     include_package_data=True,
 )
